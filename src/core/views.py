@@ -9,10 +9,15 @@ def home(request, *args, **kwargs):
     page_qs = qs.filter(path=request.path)
     my_title = "My Page"
 
+    try:
+        percentage = (page_qs.count() * 100) / qs.count()
+    except:
+        percentage = 0
+
     context = {
         "title": my_title,
         "visits_count": page_qs.count(),
-        "percentage": (page_qs.count() * 100) / qs.count(),
+        "percentage": percentage ,
         "total_visits": qs.count(),
 
     }
