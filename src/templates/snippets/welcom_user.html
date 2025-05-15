@@ -1,0 +1,5 @@
+{% if request.user.is_authenticated %}
+	<h1>Hello {{ request.user.username }}</h1>
+{% else %}
+	<h1>You are an anonymous user ! get ready</h1>
+{% endif %}

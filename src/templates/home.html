@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1>My home page</h1>
+
+    {% include 'snippets/welcom_user.html' %}
+    <h3>Page visits : {{ visits_count }} </h3>
+    <br>
+    <h3>Total visits : {{ total_visits }}</h3>
+    <br>
+    <h3>Percentage : {{ percentage }}</h3>
+{% endblock %}
