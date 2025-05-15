@@ -1,9 +1,3 @@
-FROM ubuntu:latest
-LABEL authors="guepe"
-
-ENTRYPOINT ["top", "-b"]
-
-
 # Set the python version as a build-time argument
 # with Python 3.12 as the default
 ARG PYTHON_VERSION=3.12-slim-bullseye
