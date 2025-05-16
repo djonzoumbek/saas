@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from email.policy import default
 from pathlib import Path
+
+import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,15 +88,11 @@ if DEBUG:
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-        }
+    DATABASES_URL = config('DATABASE_URL', default=None, cast=str)
+    CONN_MAX_AGE = config('CONN_MAX_AGE', default=30, cast=int)
+    if DATABASES_URL is not None:
+         DATABASES = {
+           'default': dj_database_url.config(default=DATABASES_URL, conn_max_age=30, conn_health_checks=True)
     }
 
 

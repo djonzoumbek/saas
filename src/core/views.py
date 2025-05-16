@@ -6,7 +6,7 @@ this_dir = pathlib.Path(__file__).parent.resolve()
 
 def home(request, *args, **kwargs):
     qs = PageVisit.objects.all()
-    page_qs = qs.filter(path=request.path)
+    page_qs = PageVisit.objects.filter(path=request.path)
     my_title = "My Page"
 
     try:
