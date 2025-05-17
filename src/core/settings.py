@@ -8,6 +8,30 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Email config
+
+EMAIL_HOST=config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT=config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS=config('EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_USE_SSL=config('EMAIL_USE_SSL', default=False, cast=bool)
+EMAIL_HOST_USER=config('EMAIL_HOST_USER', default='"kamisdev@gmail.com"')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+
+
+# 500 errors
+ADMIN_USER_NAME = config('ADMIN_USER_NAME', default='Admin User')
+ADMIN_USER_EMAIL = config("ADMIN_USER_EMAIL", default=None)
+
+MANAGERS=[]
+ADMINS=[]
+
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    # 500 errors are emailed to these users
+    ADMINS += [
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+    ]
+    MANAGERS = ADMINS
+# end mail conf
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -18,8 +42,16 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-^#7$1%$2@$#%$#
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    ".railway.app"
+    ".railway.app",
+
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://saas-production-e77c.up.railway.app',
+    'http://localhost:8000',  # Pour le développement local
+]
+
+
 
 if DEBUG:
     ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
