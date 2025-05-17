@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = config('DATABASE_URL', default=None)
+DATABASE_URL = config('DATABASE_URL', default='postgresql://saas_owner:npg_lkB7iO2nbwMS@ep-empty-frog-a65dix2k.us-west-2.aws.neon.tech/saas?sslmode=require')
 CONN_MAX_AGE = config('CONN_MAX_AGE', default=300, cast=int)
 
 if DATABASE_URL is not None:
