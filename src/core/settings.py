@@ -89,7 +89,7 @@ if DEBUG:
         }
     }
 else:
-    DATABASES_URL = config('DATABASE_URL', default='', cast=str)
+    DATABASES_URL = config('DATABASE_URL', default=None)
     if DATABASES_URL:
         DATABASES = {
             'default': dj_database_url.config(

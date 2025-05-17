@@ -52,6 +52,15 @@ RUN pip install -r /tmp/requirements.txt
 RUN python manage.py collectstatic --noinput
 
 
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG=${DJANGO_DEBUG}
+
+#ARG DATABASE_URL
+#ENV DATABASE_URL=${DATABASE_URL}
+
 # whitenose
 
 
