@@ -89,12 +89,17 @@ if DEBUG:
         }
     }
 else:
-    DATABASES_URL = config('DATABASE_URL', default=None, cast=str)
-    CONN_MAX_AGE = config('CONN_MAX_AGE', default=30, cast=int)
-    if DATABASES_URL is not None:
-         DATABASES = {
-           'default': dj_database_url.config(default=DATABASES_URL, conn_max_age=30, conn_health_checks=True)
-    }
+    DATABASES_URL = config('DATABASE_URL', default='', cast=str)
+    if DATABASES_URL:
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=DATABASES_URL,
+                conn_max_age=30,
+                conn_health_checks=True
+            )
+        }
+    else:
+        raise ValueError("DATABASE_URL n'est pas défini dans l'environnement de production")
 
 
 # Password validation
