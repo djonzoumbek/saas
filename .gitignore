@@ -14,6 +14,13 @@
 
 # AWS User-specific
 .idea/**/aws.xml
+# ignore vendor static files
+src/src/staticfiles/vendor
+src/staticfiles/
+vendor/*
+# ignore local cdn
+local-cdn/
+
 
 # Generated files
 .idea/**/contentModel.xml
